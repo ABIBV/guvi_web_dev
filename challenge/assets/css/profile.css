@@ -1,0 +1,17 @@
+#edit_profile_section {
+  display: none;
+}
+
+#update_btn {
+  display: none;
+}
+
+#edit_cancel {
+  display: none;
+}
+
+label {
+  padding: 3px;
+  border-radius: 3px;
+}
+/*# sourceMappingURL=profile.css.map */
