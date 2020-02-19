@@ -86,8 +86,8 @@ function loadData(){
                 $("#email_label").text(obj["Email"]);
                 $("#phone_label").text(obj["Phone"]);
                 $("#address_label").text(obj["Address"]);
-                $("#linkedin_label").text(obj["Github"]);
-                $("#github_label").text(obj["Linkedin"]);
+                $("#linkedin_label").text(obj["Linkedin"]);
+                $("#github_label").text(obj["Github"]);
             }else{
                 location.replace("/challenge/index.php");
                 alert("Please Sign In");
