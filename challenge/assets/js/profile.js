@@ -1,24 +1,24 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
-   loadData();
-   
-   $("#signout_btn").click(function (e) { 
+    loadData();
+
+    $("#signout_btn").click(function(e) {
         e.preventDefault();
         $(document).load("/challenge/assets/php_db/logout.php");
     });
 
-    $("#edit_profile_link").click(function (e) { 
+    $("#edit_profile_link").click(function(e) {
         e.preventDefault();
-      $("#profile_data table tr td p").attr("contenteditable", true);
-      $("#profile_data table tr td p").css("color", "cornflowerblue");
-      $("#update_btn, #edit_cancel").show();
-      
+        $("#profile_data table tr td p").attr("contenteditable", true);
+        $("#profile_data table tr td p").css("color", "cornflowerblue");
+        $("#update_btn, #edit_cancel").show();
+
     });
 
-    $("#update_btn").click(function (e) { 
+    $("#update_btn").click(function(e) {
         e.preventDefault();
         jsonobj = {};
-        jsonobj["Name"]= $("#name_label").html();
+        jsonobj["Name"] = $("#name_label").html();
         jsonobj["Degree"] = $("#degree_label").html();
         jsonobj["Dob"] = $("#dob_label").html();
         jsonobj["Email"] = $("#email_label").html();
@@ -26,60 +26,62 @@ $(document).ready(function () {
         jsonobj["Address"] = $("#address_label").html();
         jsonobj["Linkedin"] = $("#linkedin_label").html();
         jsonobj["Github"] = $("#github_label").html();
-        
+
         $.ajax({
             type: "POST",
             url: "/challenge/assets/php_db/update_profile.php",
             data: {
-                object : jsonobj,
-                username : $("#username_label").text()
+                object: jsonobj,
+                username: $("#username_label").text()
             },
-            success: function (response) {
-                if(response == 'success'){
+            success: function(response) {
+                if (response == 'success') {
                     alert("Successfully Updated")
                     finishUpdate();
                     loadData();
-                }else if(response == "session out"){
+                } else if (response == "session out") {
                     alert("Please Log In");
-                    location.replace("/challenge/index.php");
-                }
-                else{
+                    location.replace("/challenge/index.html");
+                } else {
                     alert("Error on Updation");
                 }
             }
         });
     });
 
-    function finishUpdate(){
+    function finishUpdate() {
         $("#profile_data table tr td p").css("color", "black");
         $("#profile_data table tr td p").attr("contenteditable", false);
         $("#update_btn, #edit_cancel").hide();
     }
 
-    $("#edit_cancel").click(function (e) { 
+    $("#edit_cancel").click(function(e) {
         e.preventDefault();
         finishUpdate();
     });
 
-    $("#signout_btn").click(function (e) { 
+    $("#signout_btn").click(function(e) {
         e.preventDefault();
-        location.replace("/challenge/index.php");
+        location.replace("/challenge/index.html");
     });
 
 });
 
 
-function loadData(){
+function loadData() {
     $.ajax({
         type: "POST",
         url: "/challenge/assets/php_db/profile_home.php",
-        success: function (response) {
-            if(response!="failed"){
+        success: function(response) {
+            if (response != "failed") {
                 resp = response.split('**sep**');
+                console.log(resp[1]);
+
                 obj = JSON.parse(resp[1]);
+                console.log(obj);
                 $("#username_head_tag").text(resp[0]);
                 $('#username_label').text(resp[0]);
-                $("#user_email").text('@'+obj["Email"]);
+                $("#user_email").text('@' + obj["Email"]);
                 $("#name_label").text(obj["Name"]);
                 $("#degree_label").text(obj["Degree"]);
                 $("#dob_label").text(obj["Dob"]);
@@ -88,9 +90,10 @@ function loadData(){
                 $("#address_label").text(obj["Address"]);
                 $("#linkedin_label").text(obj["Linkedin"]);
                 $("#github_label").text(obj["Github"]);
-            }else{
-                location.replace("/challenge/index.php");
+            } else {
+                location.replace("/challenge/index.html");
                 alert("Please Sign In");
+
             }
         }
     });

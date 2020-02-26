@@ -1,7 +1,7 @@
 <?php
 include 'db_conn.php';
 
-$sql = "insert into users (username, password, user_data) values(?,?,'{}')";
+$sql = "insert into users (username, password, user_data,auth) values(?,?,'{}',0)";
 $prepare_stmt = $conn->prepare($sql);
 $prepare_stmt->bind_param('ss',$uname,$pwd);
 

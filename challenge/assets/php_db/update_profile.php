@@ -1,7 +1,7 @@
 <?php
 
-    session_start();
-   if(isset($_SESSION["user"])){
+    
+   if(isset($_COOKIE["user"])){
        include 'db_conn.php';
        $sql = "update users set user_data = ? where username = ? ";
        $prepare_stmt = $conn->prepare($sql);
@@ -19,6 +19,6 @@
        $conn->close();
 
    }else{
-       echo "session out";
+       echo "cookie cleared";
    }
 ?>
