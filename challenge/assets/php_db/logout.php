@@ -10,9 +10,10 @@
     $authstmt = $conn->prepare($authqry);
     $authstmt->bind_param('is',$authstatus,$username);
     if($authstmt->execute()){
-        header("Location : /challenge/index.html");
+        
         unset($_COOKIE[$cookie_name]);
         setcookie($cookie_name,'', time() - 3600);
+        echo "success";
     
     }else{
         echo "failed";

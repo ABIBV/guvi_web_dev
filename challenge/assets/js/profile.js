@@ -4,7 +4,18 @@ $(document).ready(function() {
 
     $("#signout_btn").click(function(e) {
         e.preventDefault();
-        $(document).load("/challenge/assets/php_db/logout.php");
+        $.ajax({
+            type: "POST",
+            url: "/challenge/assets/php_db/logout.php",
+            success: function(response) {
+                if (response == "success") {
+                    alert("Your are successfully signed out...");
+                    location.replace('/challenge/index.html');
+                } else {
+                    alert("Sorry, Unexpected error encountered at our side");
+                }
+            }
+        });
     });
 
     $("#edit_profile_link").click(function(e) {
@@ -58,12 +69,7 @@ $(document).ready(function() {
     $("#edit_cancel").click(function(e) {
         e.preventDefault();
         finishUpdate();
-    });
-
-    $("#signout_btn").click(function(e) {
-        e.preventDefault();
-        location.replace("/challenge/index.html");
-    });
+    })
 
 });
 
