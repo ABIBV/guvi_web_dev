@@ -1,9 +1,9 @@
 <?php
-    session_start();
- 
-    if(isset($_SESSION["user"])){
-        $uname = $_SESSION["user"];
-        include 'db_conn.php';
+   
+    include 'db_conn.php';
+    $uname = $_COOKIE["user"];
+    
+    if(isset($uname)){
         $qry = "select * from users where username = ? ;";
         $stmt = $conn->prepare($qry);
         $stmt->bind_param('s', $uname);
@@ -12,11 +12,21 @@
 
         if($result->num_rows == 1){
             while($row = $result->fetch_assoc()){
-                echo $uname."**sep**".$row["user_data"];
+                $auth = $row["auth"];
+                if($auth==1){
+                    echo $uname."**sep**".$row["user_data"];
+                }else{
+                    echo "failed";
+                }
             }
+        }else{
+            echo "failed";
+            exit;
         }
     }else{
         echo "failed";
-        exit;
     }
+
+    $stmt->close();
+    $conn->close();
 ?>
