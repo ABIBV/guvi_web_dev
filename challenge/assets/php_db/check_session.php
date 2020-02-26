@@ -1,12 +1,6 @@
 <?php
 
-    // session_start();
-    // if(isset($_SESSION["user"])){
-    //     echo "success";
-    // }else{
-    //     echo "failed";
-    // }
-    include 'db_conn.php';
+include 'db_conn.php';
     
 if(isset($_COOKIE["user"])){
     $user = $_COOKIE["user"];

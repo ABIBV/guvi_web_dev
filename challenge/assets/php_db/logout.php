@@ -1,6 +1,5 @@
 <?php
-    // session_start();
-    // session_destroy();
+
     include 'db_conn.php';
 
     $cookie_name = "user";
