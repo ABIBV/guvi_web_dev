@@ -69,6 +69,6 @@ Database View
 
 Database Structure
 
-The user_data column is of JSON Data Type. But, according to MySQL, "The storage of a JSON document is approximately the same as the storage of LONGBLOB or LONGTEXT data.". But when we retrieve the Data, we get it as a JSON Object
+The user_data column is of JSON Data Type. But, according to MySQL Official Documentation, "The storage of a JSON document is approximately the same as the storage of LONGBLOB or LONGTEXT data.". But when we retrieve the Data, we get it as a JSON Object
 
 ![alt text](https://github.com/ABIBV/guvi_web_dev/blob/master/Screenshots/Screenshot_12.png)
